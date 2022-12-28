@@ -14,10 +14,10 @@ require("express-async-errors")
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./error/errorhandler")
 
-const swaggerUI = require("swagger-ui-express")
-const YAML = require("yamljs")
+// const swaggerUI = require("swagger-ui-express")
+// const YAML = require("yamljs")
 
-const swaggerDocument = YAML.load("./swagger.yaml")
+// const swaggerDocument = YAML.load("./swagger.yaml")
 
 connectDB()
 app.use(cookieParser())
@@ -42,12 +42,12 @@ app.use(helmet())
   res.send(<h1>Job Interface</h1>)
 }) */
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+// app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 app.use(express.static("./public"))
 app.use(express.json())
 app.use("/user", require("./routes/user"))
-app.use("/auth", require("./routes/auth"))
+// app.use("/auth", require("./routes/auth"))
 app.use("/refresh", require("./routes/refresh"))
 app.use("/logout", require("./routes/logout"))
 
@@ -55,7 +55,7 @@ app.use("/logout", require("./routes/logout"))
 app.use("/jobs", verifyjwt, require("./routes/jobs"))
 
 app.use(notFound)
-//app.use(errorHandler)
+app.use(errorHandler)
 
 mongoose.connection.once("open", () => {
   console.log("Connected to Database")
