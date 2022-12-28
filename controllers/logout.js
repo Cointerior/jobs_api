@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 
 const logout = async (req, res) => {
   const cookies = req.cookies
-  if(!cookies?.jwt) res.status(401).json({ msg: "no" })
+  if(!cookies?.jwt) res.status(401).json({ msg: "no cookies" })
   const refreshToken = cookies.jwt
   console.log(refreshToken)
   const foundUser = await Userdata.findOne({ refreshToken }).exec()

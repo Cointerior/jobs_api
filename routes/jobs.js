@@ -11,7 +11,7 @@ const {
 } = require("../controllers/jobs")
 
 router.route("/")
-  .get(verifyroles("user"), getAllJobs)
+  .get(verifyroles("user", "hod", "admin"), getAllJobs)
   .post(verifyroles("hod", "admin"), createJob)
 
 router.route("/:id")

@@ -58,7 +58,10 @@ const match = idRegEx.test(id)
   if(!foundJob) throw new unAuth(`No job found with ID ${id}`)
   console.log(req.body)
   if(!company || ! position) throw new badReq("Company and position must be provided")
-  const update = await Jobdata.updateOne({ company: company, position: position, new: true })
+  foundJob.company = company
+  foundJob.position = position
+  const update = await foundJob.save()
+  // const update = await Jobdata.findByIdAndUpdate(id, { company: company, position: position, new: true })
   await foundJob.save()
   res.status(StatusCodes.OK).json({ update })
 }
@@ -72,7 +75,7 @@ const match = idRegEx.test(id)
   const foundJob = await Jobdata.findOne({ _id: id }).exec()
   if(!foundJob) throw new unAuth(`No job found with ID ${id}`)
   await Jobdata.deleteOne({ _id: id })
-  res.status(StatusCodes.OK).json({ msg: `Job with Id ${id} deleted`})
+  res.status(StatusCodes.NO_CONTENT).json({ msg: `Job with Id ${id} deleted`})
 }
 
 module.exports = {
