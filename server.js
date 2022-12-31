@@ -38,11 +38,14 @@ app.use(cors())
 app.use(xss())
 app.use(helmet())
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+
 app.get("/", (req, res) => {
-  res.send(`<h1 style: text-align:>Job Interface</h1><a href="/api-docs">Documentation</a>`)
+  // res.send(`<h1 style: text-align:>Job Interface</h1><a href="/api-docs">Documentation</a>`)
+  res.redirect("api-docs")
 }) 
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+// app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 // app.use(express.static("./public"))
 app.use(express.json())
