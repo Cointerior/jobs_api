@@ -42,7 +42,7 @@ app.use(helmet())
 //   res.send(`<h1 style: text-align:>Job Interface</h1><a href="/api-docs">Documentation</a>`)
 // }) 
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+app.get("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 app.use(express.static("./public"))
 app.use(express.json())
