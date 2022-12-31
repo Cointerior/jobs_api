@@ -1,0 +1,265 @@
+openapi: 3.0.0
+info:
+  title: Jobs Api
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobs-interface.cyclic.app
+  variables: {}
+paths:
+  /user:
+    post:
+      tags:
+      - Auth
+      summary: sign up
+      operationId: signup
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/signuprequest'
+              - example:
+                  email: encore@gmail.com
+                  pwd: parasite
+                  role: admin
+            example:
+              email: encore@gmail.com
+              pwd: parasite
+              role: admin
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/auth:
+    post:
+      tags:
+      - Auth
+      summary: login user
+      operationId: loginuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/loginuserrequest'
+              - example:
+                  email: encore@gmail.com
+                  pwd: parasite
+            example:
+              email: encore@gmail.com
+              pwd: parasite
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /refresh:
+    get:
+      tags:
+      - Auth
+      summary: refreshToken
+      operationId: refreshToken
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /logout:
+    get:
+      tags:
+      - Auth
+      summary: logout
+      operationId: logout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+      - Job
+      summary: create job
+      operationId: createjob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createjobrequest'
+              - example:
+                  company: Amazon
+                  position: Backend Engineer
+            example:
+              company: Amazon
+              position: Backend Engineer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Job
+      summary: get All jobs
+      operationId: getAlljobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /job/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+      - Job
+      summary: get specific job
+      operationId: getspecificjob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Job
+      summary: update job
+      operationId: updatejob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updatejobrequest'
+              - example:
+                  company: Facebook
+                  position: Software developer
+            example:
+              company: Facebook
+              position: Software developer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Job
+      summary: delete job
+      operationId: deletejob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    signuprequest:
+      title: signuprequest
+      required:
+      - email
+      - pwd
+      - role
+      type: object
+      properties:
+        email:
+          type: string
+        pwd:
+          type: string
+        role:
+          type: string
+      example:
+        email: encore@gmail.com
+        pwd: parasite
+        role: admin
+    loginuserrequest:
+      title: loginuserrequest
+      required:
+      - email
+      - pwd
+      type: object
+      properties:
+        email:
+          type: string
+        pwd:
+          type: string
+      example:
+        email: encore@gmail.com
+        pwd: parasite
+    createjobrequest:
+      title: createjobrequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Amazon
+        position: Backend Engineer
+    updatejobrequest:
+      title: updatejobrequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Facebook
+        position: Software developer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: Job
+  description: ''
