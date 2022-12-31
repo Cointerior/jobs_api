@@ -38,13 +38,13 @@ app.use(cors())
 app.use(xss())
 app.use(helmet())
 
-// app.get("/", (req, res) => {
-//   res.send(`<h1 style: text-align:>Job Interface</h1><a href="/api-docs">Documentation</a>`)
-// }) 
+app.get("/", (req, res) => {
+  res.send(`<h1 style: text-align:>Job Interface</h1><a href="/api-docs">Documentation</a>`)
+}) 
 
-app.get("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
-app.use(express.static("./public"))
+// app.use(express.static("./public"))
 app.use(express.json())
 app.use("/user", require("./routes/user"))
 // app.use("/auth", require("./routes/auth"))
