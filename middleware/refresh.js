@@ -17,7 +17,7 @@ const refresh = async (req, res) => {
   }
   jwt.verify(
     refreshToken,
-    process.env.RRFRESH_TOKEN_SECRET,
+    process.env.REFRESH_TOKEN_SECRET,
     (err, decoded) => {
       if(err || foundUser.email !== decoded.email) {
         console.log(err)
