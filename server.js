@@ -38,9 +38,9 @@ app.use(cors())
 app.use(xss())
 app.use(helmet())
 
-/*app.get("/", (req, res) => {
-  res.send(<h1>Job Interface</h1>)
-}) */
+// app.get("/", (req, res) => {
+//   res.send(`<h1 style: text-align:>Job Interface</h1><a href="/api-docs">Documentation</a>`)
+// }) 
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
