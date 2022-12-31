@@ -55,7 +55,7 @@ app.use("/logout", require("./routes/logout"))
 app.use("/jobs", verifyjwt, require("./routes/jobs"))
 
 app.use(notFound)
-app.use(errorHandler)
+// app.use(errorHandler)
 
 mongoose.connection.once("open", () => {
   console.log("Connected to Database")
